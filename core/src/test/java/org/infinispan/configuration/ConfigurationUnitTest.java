@@ -5,6 +5,8 @@ import static org.infinispan.test.fwk.TestCacheManagerFactory.createCacheManager
 import static org.infinispan.transaction.TransactionMode.NON_TRANSACTIONAL;
 import static org.testng.Assert.assertEquals;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
 
 import javax.xml.XMLConstants;
@@ -18,8 +20,11 @@ import org.infinispan.commons.util.FileLookup;
 import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.cache.Configuration;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
+import org.infinispan.configuration.cache.EntryTypeConfigurationBuilder;
 import org.infinispan.configuration.cache.Index;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
+import org.infinispan.configuration.parsing.ConfigurationBuilderHolder;
+import org.infinispan.configuration.parsing.ParserRegistry;
 import org.infinispan.eviction.EvictionStrategy;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.infinispan.marshall.TestObjectStreamMarshaller;
@@ -177,6 +182,18 @@ public class ConfigurationUnitTest extends AbstractInfinispanTest {
       SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(schemaFile).newValidator().validate(xmlFile);
    }
 
+   @Test
+   public void testFullConfig() throws Exception {
+      FileLookup lookup = new FileLookup();
+      InputStream configFile = lookup.lookupFile("configs/unified/all.xml", Thread.currentThread().getContextClassLoader());
+      ParserRegistry parserRegistry = new ParserRegistry(Thread.currentThread().getContextClassLoader());
+      ConfigurationBuilderHolder holder = parserRegistry.parse(configFile);
+      
+      ConfigurationBuilder builder = holder.getCurrentConfigurationBuilder();
+      EntryTypeConfigurationBuilder entryType = builder.entryType();
+      
+   }
+   
    public void testEvictionWithoutStrategy() {
       ConfigurationBuilder cb = new ConfigurationBuilder();
       cb.eviction().maxEntries(76767);

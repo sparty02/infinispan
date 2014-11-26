@@ -1044,6 +1044,36 @@ public class Parser70 implements ConfigurationParser {
       }
       ParseUtils.requireNoContent(reader);
    }
+   
+   private void parseEntryType(XMLExtendedStreamReader reader,
+			ConfigurationBuilderHolder holder) throws XMLStreamException {
+	   
+	  ConfigurationBuilder builder = holder.getCurrentConfigurationBuilder();
+      
+      for (int i = 0; i < reader.getAttributeCount(); i++) {
+	     ParseUtils.requireNoNamespaceAttribute(reader, i);
+	     String value = replaceProperties(reader.getAttributeValue(i));
+	     Attribute attribute = Attribute.forName(reader.getAttributeLocalName(i));
+	 
+	     switch (attribute) {
+	        case KEY_CLASS: {
+	           Class<?> keyClass = Util.loadClass(value, holder.getClassLoader());
+	           builder.entryType().keyClass(keyClass);
+	           break;
+	        }
+	        case VALUE_CLASS: {
+	        	Class<?> valueClass = Util.loadClass(value, holder.getClassLoader());
+	           builder.entryType().valueClass(valueClass);
+	           break;
+ 	        }
+ 	        default: {
+ 	           throw ParseUtils.unexpectedAttribute(reader, i);
+ 	        }
+ 	     }
+ 	  }
+	
+	  ParseUtils.requireNoContent(reader);
+   }
 
    protected void parseCacheElement(XMLExtendedStreamReader reader, Element element, ConfigurationBuilderHolder holder) throws XMLStreamException {
       ConfigurationBuilder builder = holder.getCurrentConfigurationBuilder();
@@ -1112,6 +1142,10 @@ public class Parser70 implements ConfigurationParser {
             this.parseCacheSecurity(reader, builder);
             break;
          }
+         case ENTRY_TYPE: {
+             this.parseEntryType(reader, holder);
+             break;
+          }
          default: {
             reader.handleAny(holder);
          }

@@ -27,6 +27,11 @@ abstract class AbstractConfigurationChildBuilder implements ConfigurationChildBu
    public DeadlockDetectionConfigurationBuilder deadlockDetection() {
       return builder.deadlockDetection();
    }
+   
+   @Override
+   public EntryTypeConfigurationBuilder entryType() {
+      return builder.entryType();
+   }
 
    @Override
    public EvictionConfigurationBuilder eviction() {

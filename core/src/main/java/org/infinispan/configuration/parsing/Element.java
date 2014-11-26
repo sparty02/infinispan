@@ -34,6 +34,7 @@ public enum Element {
     DATA_CONTAINER("data-container"),
     DEFAULT("default"),
     DISTRIBUTED_CACHE("distributed-cache"),
+    ENTRY_TYPE("entry-type"),
     EVICTION("eviction"),
     EXPIRATION("expiration"),
     FILE_STORE("file-store"),

@@ -18,6 +18,7 @@ public class ConfigurationBuilder implements ConfigurationChildBuilder {
    private final CustomInterceptorsConfigurationBuilder customInterceptors;
    private final DataContainerConfigurationBuilder dataContainer;
    private final DeadlockDetectionConfigurationBuilder deadlockDetection;
+   private final EntryTypeConfigurationBuilder entryType;
    private final EvictionConfigurationBuilder eviction;
    private final ExpirationConfigurationBuilder expiration;
    private final IndexingConfigurationBuilder indexing;
@@ -40,6 +41,7 @@ public class ConfigurationBuilder implements ConfigurationChildBuilder {
       this.dataContainer = new DataContainerConfigurationBuilder(this);
       this.deadlockDetection = new DeadlockDetectionConfigurationBuilder(this);
       this.eviction = new EvictionConfigurationBuilder(this);
+      this.entryType = new EntryTypeConfigurationBuilder(this);
       this.expiration = new ExpirationConfigurationBuilder(this);
       this.indexing = new IndexingConfigurationBuilder(this);
       this.invocationBatching = new InvocationBatchingConfigurationBuilder(this);
@@ -75,6 +77,11 @@ public class ConfigurationBuilder implements ConfigurationChildBuilder {
       return deadlockDetection;
    }
 
+   @Override
+   public EntryTypeConfigurationBuilder entryType() {
+      return entryType;
+   }
+   
    @Override
    public EvictionConfigurationBuilder eviction() {
       return eviction;

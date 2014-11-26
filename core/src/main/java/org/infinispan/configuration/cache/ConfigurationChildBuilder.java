@@ -11,6 +11,8 @@ public interface ConfigurationChildBuilder {
    DataContainerConfigurationBuilder dataContainer();
 
    DeadlockDetectionConfigurationBuilder deadlockDetection();
+   
+   EntryTypeConfigurationBuilder entryType();
 
    EvictionConfigurationBuilder eviction();
 
@@ -43,4 +45,5 @@ public interface ConfigurationChildBuilder {
    void validate(GlobalConfiguration globalConfig);
 
    Configuration build();
+   
 }

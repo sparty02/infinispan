@@ -491,131 +491,205 @@
 
   <xs:complexType name="cache" abstract="true">
     <xs:sequence>
-      <xs:element name="locking" type="tns:locking" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>The locking configuration of the cache.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="transaction" type="tns:transaction" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>The cache transaction configuration.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="eviction" type="tns:eviction" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>The cache eviction configuration.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="expiration" type="tns:expiration" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>The cache expiration configuration.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="compatibility" type="tns:compatibility" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>The cache compatibility mode configuration.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="store-as-binary" type="tns:store-as-binary" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>Configures the cache to store data in binary format.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="persistence" type="tns:persistence" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>Configures the cache's persistence layer.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="versioning" type="tns:versioning" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>
-            Controls whether entries are versioned.  Versioning is necessary, for example, when using optimistic transactions in a clustered environment, to be able to perform write-skew checks.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="data-container" type="tns:data-container" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>
-            Controls the data container for the cache.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="modules" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>
-            This element contains configuration options for additional modules which affect cache configuration
-          </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence minOccurs="0" maxOccurs="unbounded">
-            <xs:any namespace="##other"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="indexing" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>
-            defined indexing options for cache
-          </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="property" type="tns:property" minOccurs="0" maxOccurs="unbounded">
-              <xs:annotation>
-                <xs:documentation>Property to pass on to the indexing system</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-          </xs:sequence>
-          <xs:attribute name="index" type="tns:indexing" default="NONE">
-            <xs:annotation>
-              <xs:documentation>The indexing mode of the cache. Defaults to NONE.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="auto-config" type="xs:boolean" default="false" use="optional">
-            <xs:annotation>
-              <xs:documentation>Whether or not to apply automatic index configuration based on cache type</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="custom-interceptors" type="tns:custom-interceptors" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>Configures custom interceptors to be added to the cache.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="security" type="tns:cache-security" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>Configures cache-level security.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="backups" type="tns:backups" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>The cross-site backup configuration.</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="backup-for" minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
-            Configures this cache as a backup for a remote cache.
-          </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:attribute name="remote-cache" type="xs:string" use="optional">
-            <xs:annotation>
-              <xs:documentation>
-                The name of the remote cache that backups data here.
-              </xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="remote-site" type="xs:string" use="optional">
-            <xs:annotation>
-              <xs:documentation>
-                The name of the remote site containing the cache that backups data here.
-              </xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-        </xs:complexType>
-      </xs:element>
+    	<xs:element name="locking" type="tns:locking" minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				The locking configuration of the cache.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="transaction" type="tns:transaction"
+    		minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				The cache transaction configuration.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="eviction" type="tns:eviction" minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				The cache eviction configuration.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="expiration" type="tns:expiration"
+    		minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				The cache expiration configuration.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="compatibility" type="tns:compatibility"
+    		minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				The cache compatibility mode configuration.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="store-as-binary" type="tns:store-as-binary"
+    		minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				Configures the cache to store data in binary format.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="persistence" type="tns:persistence"
+    		minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				Configures the cache's persistence layer.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="versioning" type="tns:versioning"
+    		minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				Controls whether entries are versioned. Versioning
+    				is necessary, for example, when using optimistic
+    				transactions in a clustered environment, to be able
+    				to perform write-skew checks.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="data-container" type="tns:data-container"
+    		minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				Controls the data container for the cache.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="modules" minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				This element contains configuration options for
+    				additional modules which affect cache configuration
+    			</xs:documentation>
+    		</xs:annotation>
+    		<xs:complexType>
+    			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+    				<xs:any namespace="##other" />
+    			</xs:sequence>
+    		</xs:complexType>
+    	</xs:element>
+    	<xs:element name="indexing" minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				defined indexing options for cache
+    			</xs:documentation>
+    		</xs:annotation>
+    		<xs:complexType>
+    			<xs:sequence>
+    				<xs:element name="property" type="tns:property"
+    					minOccurs="0" maxOccurs="unbounded">
+    					<xs:annotation>
+    						<xs:documentation>
+    							Property to pass on to the indexing
+    							system
+    						</xs:documentation>
+    					</xs:annotation>
+    				</xs:element>
+    			</xs:sequence>
+    			<xs:attribute name="index" type="tns:indexing"
+    				default="NONE">
+    				<xs:annotation>
+    					<xs:documentation>
+    						The indexing mode of the cache. Defaults to
+    						NONE.
+    					</xs:documentation>
+    				</xs:annotation>
+    			</xs:attribute>
+    			<xs:attribute name="auto-config" type="xs:boolean"
+    				default="false" use="optional">
+    				<xs:annotation>
+    					<xs:documentation>
+    						Whether or not to apply automatic index
+    						configuration based on cache type
+    					</xs:documentation>
+    				</xs:annotation>
+    			</xs:attribute>
+    		</xs:complexType>
+    	</xs:element>
+    	<xs:element name="custom-interceptors"
+    		type="tns:custom-interceptors" minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				Configures custom interceptors to be added to the
+    				cache.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="security" type="tns:cache-security"
+    		minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				Configures cache-level security.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="backups" type="tns:backups" minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				The cross-site backup configuration.
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="backup-for" minOccurs="0" maxOccurs="1">
+    		<xs:annotation>
+    			<xs:documentation>
+    				Configures this cache as a backup for a remote
+    				cache.
+    			</xs:documentation>
+    		</xs:annotation>
+    		<xs:complexType>
+    			<xs:attribute name="remote-cache" type="xs:string"
+    				use="optional">
+    				<xs:annotation>
+    					<xs:documentation>
+    						The name of the remote cache that backups
+    						data here.
+    					</xs:documentation>
+    				</xs:annotation>
+    			</xs:attribute>
+    			<xs:attribute name="remote-site" type="xs:string"
+    				use="optional">
+    				<xs:annotation>
+    					<xs:documentation>
+    						The name of the remote site containing the
+    						cache that backups data here.
+    					</xs:documentation>
+    				</xs:annotation>
+    			</xs:attribute>
+    		</xs:complexType>
+    	</xs:element>
+    	<xs:element name="entry-type" minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>
+    				strong typing for cache entry keys/values
+    			</xs:documentation>
+    		</xs:annotation>
+    		<xs:complexType>
+    			<xs:attribute name="keyClass" type="xs:string">
+    				<xs:annotation>
+    					<xs:documentation>
+    						The fully qualified class name of the entry key.
+    					</xs:documentation>
+    				</xs:annotation>
+    			</xs:attribute>
+    			<xs:attribute name="auto-config" type="xs:string">
+    				<xs:annotation>
+    					<xs:documentation>
+    						The fully qualified class name of the entry value.
+    					</xs:documentation>
+    				</xs:annotation>
+    			</xs:attribute>
+    		</xs:complexType>
+    	</xs:element>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required">
       <xs:annotation>
